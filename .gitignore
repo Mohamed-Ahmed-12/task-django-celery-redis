@@ -1,0 +1,47 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+.venv
+env/
+venv/
+ENV/
+
+# --- Django ---
+db.sqlite3
+db.sqlite4
+/static/
+src/staticfiles/
+/media/
+# If you use a local logs folder
+/logs/
+*.log
+
+# --- Docker & System ---
+.docker/
+# IMPORTANT: Never commit your actual production .env
+.env.prod
+.env.db
+.env.celery
+
+# --- Redis & Celery ---
+# Celery beat schedule file
+celerybeat-schedule
+# If you use a local redis dump for persistence
+dump.rdb
+
+# --- IDEs & Editors ---
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# --- Testing & Coverage ---
+.pytest_cache/
+.coverage
+htmlcov/
+nosetests.xml
+coverage.xml
+*.cover
