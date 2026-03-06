@@ -67,7 +67,7 @@ def process_transaction_task(self, transaction_id):
             # Trigger the retry logic because it wasn't a 200 OK
             raise Exception(f"Provider returned {response.status_code}")
     except Exception as exc:
-        tx.result = {"error": str(exc), "retry": self.request.retries}
+        tx.result = {"detail": str(exc), "retry": self.request.retries}
         tx.save(update_fields=["result"])
 
         try:

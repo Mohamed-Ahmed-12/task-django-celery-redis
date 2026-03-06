@@ -11,12 +11,15 @@ from .models import Batch, Transaction
 class BatchAPIView(APIView):
     pagination_class = PageNumberPagination
     def post(self, request):
+        transactions=request.data.get('transactions', [])
+        if len(transactions) == 0:
+            return Response ({"detail":"list of Transactions must be exist"},status=status.HTTP_400_BAD_REQUEST,)
         with transaction.atomic():
             # 1. Validate and Create Batch
             serializer = CreateBatchSerializer(data={"client": request.user.id})
             serializer.is_valid(raise_exception=True)
             batch = serializer.save()
-            transactions=request.data.get('transactions', [])
+                
             # 2. Validate and Create Transactions
             tx_serializer = CreateTransactionSerializer(
                 data=transactions,
@@ -50,7 +53,7 @@ class BatchAPIView(APIView):
             return Response(serializer.data)
         
         # Retrieve the status and transactions of a specific batch.
-        batch = get_object_or_404(Batch, id=pk, client=request.user)
+        batch = get_object_or_404(Batch, id=pk,)
         serializer = BatchDetailSerializer(batch)
         return Response(serializer.data, status=status.HTTP_200_OK)
         

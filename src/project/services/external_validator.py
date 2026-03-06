@@ -2,6 +2,8 @@ import time
 import random
 import logging
 from rest_framework.views import APIView, Response
+from rest_framework.renderers import JSONRenderer
+
 from rest_framework import status
 logger = logging.getLogger(__name__)
 
@@ -9,6 +11,7 @@ logger = logging.getLogger(__name__)
 # Mock service endpoint
 class MockValidationService(APIView):
     permission_classes = []
+    renderer_classes = [JSONRenderer,]
 
     def post(self, request):
         payload = request.data.get("payload")

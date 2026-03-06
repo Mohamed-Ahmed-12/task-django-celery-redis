@@ -151,6 +151,7 @@ REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
         'project.utils.render.CustomJSONRenderer',
     ],
+    'PAGE_SIZE':2
 }
 # CELERY SETTINGS
 CELERY_BROKER_URL ='redis://redis:6379/0'
